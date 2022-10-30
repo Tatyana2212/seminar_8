@@ -1,0 +1,58 @@
+// Найти произведение двух матриц.
+void FillMatrix(int[,] matrix)
+{
+    Random random = new Random();
+    for (int i = 0; i < matrix.GetLength(0); i++)
+    for (int j = 0; j < matrix.GetLength(1); j++)
+    matrix[i,j] = random.Next(-10, 10);    
+}
+void PrintMatrix(int[,] matrix)
+{
+    for (int i = 0; i < matrix.GetLength(0); i++)
+    {
+        for (int j = 0; j < matrix.GetLength(1); j++)
+        Console.Write($"{matrix[i,j]} ");
+    Console.WriteLine();
+    }
+}
+int [,] ProductMatrices (int[,] a, int[,] b)
+{
+    int [,] c = new int [a.GetLength(0), b.GetLength(1)];   
+ 
+        for (int i = 0; i < c.GetLength(0); i++)          
+            for (int j = 0; j < c.GetLength(1); j++)            
+                for (int k = 0; k < a.GetLength(1); k++)
+                    c[i,j] = c[i,j]+a[i,k]*b[k,j];
+            
+    return c;
+}
+
+Console.WriteLine("Enter the quantity of numbers in row of the first matrix: ");
+int m = int.Parse (Console.ReadLine() ?? "0");
+Console.WriteLine("Enter the quantity of numbers in the columns of the first matrix: ");
+int n = int.Parse (Console.ReadLine() ?? "0");
+
+Console.WriteLine("Enter the quantity of numbers in row of the second matrix: ");
+int d = int.Parse (Console.ReadLine() ?? "0");
+Console.WriteLine("Enter the quantity of numbers in the columns of the second matrix: ");
+int e = int.Parse (Console.ReadLine() ?? "0");
+int [,] a = new int[m,n];
+int [,] b = new int [d,e];
+
+
+FillMatrix(a);
+Console.WriteLine();
+Console.WriteLine("The first matrix:");
+PrintMatrix(a);
+Console.WriteLine();
+FillMatrix(b);
+Console.WriteLine("The second matrix:");
+PrintMatrix(b);
+Console.WriteLine();
+if (n==d) 
+{
+int [,] c = ProductMatrices(a,b);
+Console.WriteLine("The product of Matrixes ");
+PrintMatrix(c);
+}
+else Console.WriteLine("The product of two matrixes is imposible.");
